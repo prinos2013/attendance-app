@@ -75,6 +75,34 @@
       background: white;
     }
 
+    /* Total Enrolment Display Box */
+    .enrolment-badge {
+      display: none;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .enrolment-badge span.label-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .enrolment-badge span.count-number {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: #dbeafe;
+      padding: 2px 10px;
+      border-radius: 9999px;
+    }
+
     .instruction {
       font-size: 0.85rem;
       color: #64748b;
@@ -240,6 +268,12 @@
       <option value="V/A 1">V/A 1</option>
       <option value="V/A 2">V/A 2</option>
     </select>
+  </div>
+
+  <!-- Total Enrolment Box -->
+  <div class="enrolment-badge" id="enrolmentBadge" style="display: none;">
+    <span class="label-text">Total Enrolment:</span>
+    <span class="count-number" id="enrolmentCount">0</span>
   </div>
 
   <div class="form-group">
@@ -426,7 +460,6 @@
       ]
     };
 
-    // Load customized rosters from localStorage or use defaults
     let classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
 
     // Ensure all classes are sorted alphabetically on initial load
@@ -465,15 +498,12 @@
         classRosters[selectedClass] = [];
       }
 
-      // Check case-insensitively if the student is already listed
       if (classRosters[selectedClass].some(s => s.toLowerCase() === name.toLowerCase())) {
         alert("This student is already in the class.");
         return;
       }
 
       classRosters[selectedClass].push(name);
-      
-      // Sort alphabetically (A-Z)
       classRosters[selectedClass].sort((a, b) => a.localeCompare(b));
 
       saveRostersLocally();
@@ -482,7 +512,7 @@
     }
 
     function removeStudent(event, name) {
-      event.stopPropagation(); // Prevents marking the student absent when clicking delete
+      event.stopPropagation();
       const selectedClass = document.getElementById('classSelect').value;
 
       if (!confirm(`Are you sure you want to remove "${name}" from ${selectedClass}?`)) {
@@ -500,19 +530,26 @@
       const container = document.getElementById('attendanceContainer');
       const list = document.getElementById('studentList');
       const summary = document.getElementById('resultSummary');
+      const enrolmentBadge = document.getElementById('enrolmentBadge');
+      const enrolmentCount = document.getElementById('enrolmentCount');
 
       summary.style.display = 'none';
       absentSet.clear();
 
       if (!selectedClass) {
         container.style.display = 'none';
+        enrolmentBadge.style.display = 'none';
         return;
       }
 
+      const students = classRosters[selectedClass] || [];
+
+      // Update Total Enrolment badge
+      enrolmentCount.innerText = students.length;
+      enrolmentBadge.style.display = 'flex';
+
       container.style.display = 'block';
       list.innerHTML = '';
-
-      const students = classRosters[selectedClass] || [];
 
       students.forEach((name, index) => {
         const card = document.createElement('div');
