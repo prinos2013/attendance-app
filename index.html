@@ -104,6 +104,12 @@
       transition: all 0.15s ease;
     }
 
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .student-card .status-badge {
       font-size: 0.8rem;
       font-weight: 700;
@@ -123,6 +129,17 @@
       color: #991b1b;
     }
 
+    .btn-delete {
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .btn {
       width: 100%;
       padding: 14px;
@@ -138,6 +155,45 @@
     .btn:disabled {
       background-color: #94a3b8;
       cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background-color: #475569;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* Student Management Drawer */
+    .manage-box {
+      display: none;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .manage-input-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .manage-input-row input {
+      flex: 1;
+      padding: 8px;
+    }
+
+    .btn-add {
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .summary-box {
@@ -192,6 +248,19 @@
   </div>
 
   <div id="attendanceContainer" style="display: none;">
+    <button type="button" class="btn btn-secondary" onclick="toggleManageSection()">⚙️ Manage Students (Add/Remove)</button>
+
+    <div class="manage-box" id="manageSection">
+      <label for="newStudentName" style="font-size: 0.8rem;">Add New Student to Selected Class:</label>
+      <div class="manage-input-row">
+        <input type="text" id="newStudentName" placeholder="Enter student's full name">
+        <button type="button" class="btn-add" onclick="addStudent()">Add</button>
+      </div>
+      <p style="font-size: 0.75rem; color: #64748b; margin-top: 6px;">
+        To remove a student, click the red <strong>Delete</strong> button next to their name.
+      </p>
+    </div>
+
     <div class="instruction">
       Tap on a student <strong>only if absent</strong>. Leave untouched if present.
     </div>
@@ -204,10 +273,9 @@
   </div>
 
   <script>
-    // Paste your Google Apps Script Web App URL between the quotes:
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbza7suTT8fbPtriMRqv0vwxb42q3TJ45yMJ5TAG7elhyWHJLZ6YNU1PTAd1iGysFhlfnw/exec";
 
-    const classRosters = {
+    const defaultRosters = {
       "AGRIC": [
         "Albert Nanayaw Botwey", "Alfred Nkrumah", "Amanda Soforye Mawunyo", "Antoinette Acquah", 
         "Asante Yeboah", "Belinba Owusu Boateng", "Benjamin", "Bright Osei Mensah", "Daniel Botwey", 
@@ -358,8 +426,64 @@
       ]
     };
 
+    // Load customized rosters from localStorage or use defaults
+    let classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
+
+    function saveRostersLocally() {
+      localStorage.setItem('custom_rosters', JSON.stringify(classRosters));
+    }
+
     let absentSet = new Set();
     document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
+
+    function toggleManageSection() {
+      const section = document.getElementById('manageSection');
+      section.style.display = section.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function addStudent() {
+      const selectedClass = document.getElementById('classSelect').value;
+      const input = document.getElementById('newStudentName');
+      const name = input.value.trim();
+
+      if (!selectedClass) {
+        alert("Please select a class first.");
+        return;
+      }
+
+      if (!name) {
+        alert("Please type a student's name.");
+        return;
+      }
+
+      if (!classRosters[selectedClass]) {
+        classRosters[selectedClass] = [];
+      }
+
+      if (classRosters[selectedClass].includes(name)) {
+        alert("This student is already in the class.");
+        return;
+      }
+
+      classRosters[selectedClass].push(name);
+      saveRostersLocally();
+      input.value = "";
+      renderStudents();
+    }
+
+    function removeStudent(event, name) {
+      event.stopPropagation(); // Prevents marking the student absent when clicking delete
+      const selectedClass = document.getElementById('classSelect').value;
+
+      if (!confirm(`Are you sure you want to remove "${name}" from ${selectedClass}?`)) {
+        return;
+      }
+
+      classRosters[selectedClass] = classRosters[selectedClass].filter(s => s !== name);
+      absentSet.delete(name);
+      saveRostersLocally();
+      renderStudents();
+    }
 
     function renderStudents() {
       const selectedClass = document.getElementById('classSelect').value;
@@ -386,7 +510,10 @@
         card.id = `student-${index}`;
         card.innerHTML = `
           <span>${name}</span>
-          <span class="status-badge" id="badge-${index}">PRESENT</span>
+          <div class="card-actions">
+            <span class="status-badge" id="badge-${index}">PRESENT</span>
+            <button type="button" class="btn-delete" onclick="removeStudent(event, '${name.replace(/'/g, "\\'")}')">✕</button>
+          </div>
         `;
         card.onclick = () => toggleAbsent(index, name);
         list.appendChild(card);
