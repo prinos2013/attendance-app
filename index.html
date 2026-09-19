@@ -157,7 +157,9 @@
       color: #991b1b;
     }
 
+    /* Delete buttons hidden by default */
     .btn-delete {
+      display: none;
       background: #ef4444;
       color: white;
       border: none;
@@ -166,6 +168,11 @@
       font-size: 0.75rem;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    /* Show delete buttons only when management mode is active */
+    .managing .btn-delete {
+      display: inline-block;
     }
 
     .btn {
@@ -290,8 +297,8 @@
         <input type="text" id="newStudentName" placeholder="Enter student's full name">
         <button type="button" class="btn-add" onclick="addStudent()">Add</button>
       </div>
-      <p style="font-size: 0.75rem; color: #64748b; margin-top: 6px;">
-        Students are automatically sorted alphabetically (A–Z). Click <strong>✕</strong> to remove a student.
+      <p style="font-size: 0.75rem; color: #64748b; margin-top: 8px;">
+        Delete buttons (<strong>✕</strong>) are now visible beside each student below. Tap <strong>✕</strong> to remove a student. Tap <strong>⚙️ Manage Students</strong> again when finished to hide them.
       </p>
     </div>
 
@@ -476,7 +483,16 @@
 
     function toggleManageSection() {
       const section = document.getElementById('manageSection');
-      section.style.display = section.style.display === 'block' ? 'none' : 'block';
+      const list = document.getElementById('studentList');
+      const isOpen = section.style.display === 'block';
+
+      if (isOpen) {
+        section.style.display = 'none';
+        list.classList.remove('managing');
+      } else {
+        section.style.display = 'block';
+        list.classList.add('managing');
+      }
     }
 
     function addStudent() {
@@ -532,6 +548,7 @@
       const summary = document.getElementById('resultSummary');
       const enrolmentBadge = document.getElementById('enrolmentBadge');
       const enrolmentCount = document.getElementById('enrolmentCount');
+      const manageSection = document.getElementById('manageSection');
 
       summary.style.display = 'none';
       absentSet.clear();
@@ -539,6 +556,8 @@
       if (!selectedClass) {
         container.style.display = 'none';
         enrolmentBadge.style.display = 'none';
+        manageSection.style.display = 'none';
+        list.classList.remove('managing');
         return;
       }
 
