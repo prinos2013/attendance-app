@@ -257,7 +257,7 @@
         <button type="button" class="btn-add" onclick="addStudent()">Add</button>
       </div>
       <p style="font-size: 0.75rem; color: #64748b; margin-top: 6px;">
-        To remove a student, click the red <strong>Delete</strong> button next to their name.
+        Students are automatically sorted alphabetically (A–Z). Click <strong>✕</strong> to remove a student.
       </p>
     </div>
 
@@ -429,6 +429,11 @@
     // Load customized rosters from localStorage or use defaults
     let classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
 
+    // Ensure all classes are sorted alphabetically on initial load
+    Object.keys(classRosters).forEach(cls => {
+      classRosters[cls].sort((a, b) => a.localeCompare(b));
+    });
+
     function saveRostersLocally() {
       localStorage.setItem('custom_rosters', JSON.stringify(classRosters));
     }
@@ -460,12 +465,17 @@
         classRosters[selectedClass] = [];
       }
 
-      if (classRosters[selectedClass].includes(name)) {
+      // Check case-insensitively if the student is already listed
+      if (classRosters[selectedClass].some(s => s.toLowerCase() === name.toLowerCase())) {
         alert("This student is already in the class.");
         return;
       }
 
       classRosters[selectedClass].push(name);
+      
+      // Sort alphabetically (A-Z)
+      classRosters[selectedClass].sort((a, b) => a.localeCompare(b));
+
       saveRostersLocally();
       input.value = "";
       renderStudents();
