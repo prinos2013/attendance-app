@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1e3a8a">
-  <title>Student Attendance Tracker</title>
+  <title>Attend ICT</title>
+
+  <!-- iOS / Apple Home Screen Name & Icon Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Attend ICT">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -352,7 +357,6 @@
       ]
     };
 
-    // Incremented cache version to refresh device storage automatically
     const ROSTER_VERSION = "2025_2026_portal_reduced_v2";
     let classRosters;
 
@@ -364,7 +368,6 @@
       classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
     }
 
-    // Ensure all classes are sorted alphabetically on initial load
     Object.keys(classRosters).forEach(cls => {
       classRosters[cls].sort((a, b) => a.localeCompare(b));
     });
@@ -458,7 +461,6 @@
 
       const students = classRosters[selectedClass] || [];
 
-      // Update Total Enrolment badge
       enrolmentCount.innerText = students.length;
       enrolmentBadge.style.display = 'flex';
 
