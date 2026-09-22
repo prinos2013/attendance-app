@@ -1,10 +1,10 @@
 {
-  "name": "Attendance Tracker",
+  "name": "Attend ICT",
   "short_name": "Attend ICT",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#1e3a8a",
   "icons": [
     {
       "src": "icon-192.png",
