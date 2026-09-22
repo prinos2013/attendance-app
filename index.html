@@ -61,11 +61,24 @@
 
     .header {
       margin-bottom: 16px;
+      text-align: center;
     }
 
     .header h1 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       color: var(--primary);
+    }
+
+    .subject-pill {
+      display: inline-block;
+      margin-top: 4px;
+      background: #dbeafe;
+      color: #1e3a8a;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 14px;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
     }
 
     .form-group {
@@ -88,7 +101,7 @@
       background: white;
     }
 
-    /* Total Enrolment Display Box */
+    /* Total Students Display Box */
     .enrolment-badge {
       display: none;
       background: #eff6ff;
@@ -258,14 +271,7 @@
 
   <div class="header">
     <h1>Student Attendance</h1>
-  </div>
-
-  <div class="form-group">
-    <label for="subjectSelect">Select Subject</label>
-    <select id="subjectSelect">
-      <option value="Computing">Computing</option>
-      <option value="ICT">ICT</option>
-    </select>
+    <span class="subject-pill">ICT</span>
   </div>
 
   <div class="form-group">
@@ -285,9 +291,9 @@
     </select>
   </div>
 
-  <!-- Total Enrolment Box -->
+  <!-- Total Students Box -->
   <div class="enrolment-badge" id="enrolmentBadge" style="display: none;">
-    <span class="label-text">Total Enrolment:</span>
+    <span class="label-text">Total Students:</span>
     <span class="count-number" id="enrolmentCount">0</span>
   </div>
 
@@ -357,7 +363,8 @@
       ]
     };
 
-    const ROSTER_VERSION = "2025_2026_portal_reduced_v2";
+    // Incremented cache version to refresh device storage automatically
+    const ROSTER_VERSION = "2025_2026_portal_ict_only_v3";
     let classRosters;
 
     if (localStorage.getItem('custom_rosters_ver') !== ROSTER_VERSION) {
@@ -499,7 +506,6 @@
     }
 
     async function saveAndSyncAttendance() {
-      const selectedSubject = document.getElementById('subjectSelect').value;
       const selectedClass = document.getElementById('classSelect').value;
       const selectedDate = document.getElementById('datePicker').value;
       const totalStudents = classRosters[selectedClass].length;
@@ -508,8 +514,9 @@
       const submitBtn = document.getElementById('submitBtn');
       const summary = document.getElementById('resultSummary');
 
+      // Fixed subject: ICT
       const payload = {
-        subject: selectedSubject,
+        subject: "ICT",
         class: selectedClass,
         date: selectedDate,
         total: totalStudents,
@@ -518,7 +525,7 @@
         absentList: absentStudents
       };
 
-      const storageKey = `attendance_${selectedSubject}_${selectedClass}_${selectedDate}`;
+      const storageKey = `attendance_ICT_${selectedClass}_${selectedDate}`;
       localStorage.setItem(storageKey, JSON.stringify(payload));
 
       submitBtn.disabled = true;
@@ -538,7 +545,7 @@
 
         summary.innerHTML = `
           <strong style="color: #166534;">✅ Saved & Synced Successfully!</strong><br>
-          <strong>Subject:</strong> ${selectedSubject}<br>
+          <strong>Subject:</strong> ICT<br>
           <strong>Class:</strong> ${selectedClass} (${selectedDate})<br>
           • Present: ${presentCount} / ${totalStudents}<br>
           • Absent (${absentStudents.length}): ${absentStudents.length > 0 ? absentStudents.join(', ') : 'None'}
