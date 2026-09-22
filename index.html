@@ -268,17 +268,12 @@
     <select id="classSelect" onchange="renderStudents()">
       <option value="">-- Choose Class --</option>
       <option value="AGRIC">AGRIC</option>
-      <option value="ARTS 1">ARTS 1</option>
-      <option value="ARTS 2A">ARTS 2A</option>
-      <option value="ARTS 2B">ARTS 2B</option>
       <option value="ARTS 3">ARTS 3</option>
-      <option value="ARTS 4">ARTS 4</option>
       <option value="BUS">BUS</option>
       <option value="H/E 1A">H/E 1A</option>
       <option value="H/E 1B">H/E 1B</option>
       <option value="H/E 2A">H/E 2A</option>
       <option value="H/E 2B">H/E 2B</option>
-      <option value="LANG">LANG</option>
       <option value="SCI">SCI</option>
       <option value="V/A 1">V/A 1</option>
       <option value="V/A 2">V/A 2</option>
@@ -326,156 +321,48 @@
 
     const defaultRosters = {
       "AGRIC": [
-        "Albert Nanayaw Botwey", "Alfred Nkrumah", "Amanda Soforye Mawunyo", "Antoinette Acquah", 
-        "Asante Yeboah", "Belinba Owusu Boateng", "Benjamin", "Bright Osei Mensah", "Daniel Botwey", 
-        "Deborah Mensah", "Doris Odoom", "Ebenezer Arthur", "Elvis Kyei Baffour", "Emmanuel Lamptey", 
-        "Emmanuel Manu", "Ernest Yamoah", "Esther Arkoh", "Francis Amoh", "Gifty Baah Marfo", 
-        "Gladys Agyekum", "Gloria Eshun", "Gloria Oppong", "Goodluck Nichie", "Isaac Mensah", 
-        "Issah Rashid", "Joel Pascal Ofosu", "Karen Owusuwaa Afum", "Kingsley Affel", "Patrick Acquah", 
-        "Priscilla Arthur Yeboah", "Richard Ansah Yeboah", "Richard Opare", "Sampson Baah", 
-        "Samuel Dadzie", "Sandra Yeboah", "Thomas Mensah", "Vera Nsowah Kyei Baffour", 
-        "Victoria Acheampong", "William Anaman Badu"
-      ],
-      "ARTS 1": [
-        "Augustina Dzidedi Azaloo", "Benedicta Ahianyo", "Blessing Kumah", "Catherine Kekeli Atitso", 
-        "Christbel Asante Gyamfuwaa", "Christian Laweh Kussiedu", "Christiana Mawusi", "Clifford Sei Jorbuno", 
-        "Daniel Adjei", "Desmond Ntim", "Dora Robertson", "Edna Atamale Lamisi", "Edward Asante Ossew", 
-        "Edward Bediako", "Edwin Asante Ossew", "Elizabeth Yeboah", "Emily Baidoo Idun", "Emmanuel Botchway", 
-        "Emmanuel Quainoo", "Emmanuella Aidoo Ayeh", "Enoch Okaitei Nettey", "Essel Ekoa", "Esther Clottey", 
-        "Esther Yevu", "Eunice Emedume", "Evans Kwegyir", "Evans Mensah", "Felix Quainoo", "Fuseini Yasminatu", 
-        "Georgina Frimpong", "Gerrard Mensah Botwey", "Gifty Nhyiraba Aggrey", "Grace Sackey Twumwaa", 
-        "Isabella Dumenya V.K.Y.", "James Donkoh", "Jessica Amoasi", "Joana Appiah", "Joana Mensah", 
-        "Joana Nhyira", "Judith Zuvile Kuunibe", "Justice Lamptey", "Kate Baffoe Antwi", 
-        "Leticia Korankyewaa Entsil", "Mary Marriam", "Mohammed Karimatu", "Nicholas Arhin", 
-        "Obed Ampadu Senior", "Paulina Akua Akyaa Danso", "Priscilla Agyapong", "Priscilla Amoah", 
-        "Priscilla Dadzie", "Regina Afful", "Richard Atwer", "Rita Egbuaba Amara", "Rosalinda Obosu", 
-        "Sadia Duda", "Samuel Mensah Boadu", "Silas Abban", "Sophia Intsiful", "Stephanie Aggrey", 
-        "Syria Osei", "Vera Mensah", "Vincent Baah", "Vincentia Baidoo Prah", "Winifred Takyi", 
-        "Zurfawa Mohammed Ngisah"
-      ],
-      "ARTS 2A": [
-        "Abigail Nhyira Boatemaa Lyei", "Abraham Korankye Boafo", "Barikisu Badua Acquah", "Beatrice Ackaah", 
-        "Bismark Gyamfi", "Blessing Kyerewa Yawson", "Christabel Botchwey", "Cindy Arthur", "Daisy Kafaru", 
-        "Dorothy Klutse", "Elizabeth Barbara Antwiwaa", "Emelia Egyir", "Emmanuel Baidoo", "Enock Ayiah", 
-        "Eric Adikah", "Erica Baryee Alice Slewro Morris", "Esther Nifa Amoanoo", "Evelyn Acquah", 
-        "Evelyn Antwiwaah Agyemang Botah", "Gideon Ackwerh", "Henry Affrim Nyamekye Junior", "Isaac Adjei", 
-        "Jacob Akueteh Nunoo", "Jajah Hafsatu Mutawakilu", "Jennifer Mills", "Jessica Lamptey", 
-        "Joseph Appiah Mensah", "Kingsford Asamoah", "Lydia Koomson", "Mary Nkpanbi", "Paintsil Edna", 
-        "Priscilla Gbegbewu", "Razak Andelatu", "Stephen Arthur", "Sylvester Dadzie", "Williams Yayra", 
-        "Winnifred Eduah Mensah", "Yussif Danjumah"
-      ],
-      "ARTS 2B": [
-        "Annabel Lamptey", "Bismark Otabil", "Blessing Lamptey", "Bright Ohene", "Celestina Mensah", 
-        "Charlotte Adu Apoh", "Chris Amoama", "Christabel Opoku", "Cornelius Biney", "David Annan", 
-        "Emmanuel Aidoo", "Esther Oboh", "Eugene Timo", "Eunice Allotey", "Florence Abano", "Gifty Arthur", 
-        "Gifty Kwakye", "Gladys Owusu Ansah", "Henry Baidoo", "Henry Osei Mensah", "Hilary Manson", 
-        "Isaac Amenuvor", "Ivy Tsibu Affiamoah", "Jessica Affoh", "Jessica Mawutor", "Joseph Harrison Eshun", 
-        "Justice Appau", "Leticia Abekah Ennin", "Linda Arthur", "Martha Eyram Atakpa", "Mary Afia Mensah", 
-        "Mary Oku Mensah", "Mary Quainoo", "Maybel Annor", "Nancy Nana Yaa Donkor", "Nora Naa Ayeley Armah", 
-        "Prince Amanfo", "Priscilla A Asampana", "Regina Coffie", "Richard Begyina", 
-        "Richmond Elisha Owusu Akyaw", "Richmond Ohene", "Ruth Ayensu", "Samiratu Awudu", "Sampson Essuman", 
-        "Sheriff Nkum", "Stephen Asare", "Vera Yaa Eyram Tsatsu", "Victoria Enyonam Darkoh", "Yvonne Yeboah"
+        "Abbam Godfred", "Acquah Antoinette", "Acquah Benjamin", "Acquah Patrick", "Affel Kingsley", "Agyekum Gladys", "Agyempong Victoria", "Aidoo Angela", "Amoah Francis", "Ansah Bright", "Ansah Teboah Richard", "Arko Esther", "Arthur Ebenezer", "Arthur Teboah Priscilla", "Atum Ohenewa Kareem", "Baah Mario Gift", "Baah Samson", "Badu Anaman William", "Badur Kyei Ellis", "Boateng Owusu Belinda", "Botwey Albert Nana Yaw", "Botwey Daniel", "Dadzie Samuel", "Eshun Gloria", "Gamba Richard", "Kyei Baffour Elvis", "Lamptey Emmanuel", "Manu Emmanuel", "Mawunyo Soforye Amanda", "Mensah Bright Osei", "Mensah Deborah", "Mensah Isaac", "Mensah Thomas", "Nichie Goodluck", "Nkrumah Alfred", "Nsowah Kyei Baffour Vera", "Odoom Doris", "Ofosu Joel Pascal", "Opare Richard", "Oppong Gloria", "Owusu Boateng Belinba", "Owusuwaa Afum Karen", "Rashid Issah", "Yamoah Ernest", "Yeboah Asante Kweku"
       ],
       "ARTS 3": [
-        "Abigail Otabil", "Angela Tetteh", "Anita Nyarkoh", "Barikisu Tettehwayo", "Biridget Paintsil", 
-        "Bismark Inkoom", "Blessed Nyarkoh Koranteng", "Bridget Okwan", "Deborah Oppong", 
-        "Dominica Namwinpoupel Naakpaan", "Doris Ofosuwaa Nyamekye Mensah", "Doris Tunumor", 
-        "Elizabeth Ayieye Mensah", "Elizabeth Wonkyi", "Festus Koomson", "Francisca Nkrumah Asamoah", 
-        "Fredrica De-Graft Adjaye", "Georgina Omano", "Hannah Amoah", "Harriet Sakyi", "Hilda Ayensu", 
-        "Jackline Nyavlo", "Joana Nana Mensah", "Joyce Adjewunah", "Joycelyn Nhyira Donkor", "Kelvin Hagan", 
-        "Leticia Blessing Quansah", "Lois Quansah", "Mary Appu", "Mary Boafoah", "Mary Nana Aba Mensah", 
-        "Matilda Amoako", "Matilda Boadi", "Michelle Nhyira Appiah", "Mimi Nhyira Appiah", "Patiience Arthur", 
-        "Princess Racheal Amanorkie Taye", "Priscilla Aikins", "Priscilla Fayah", "Ruben Otopah Ntow", 
-        "Ruth Essel", "Samuel Tetteh", "Sheila Achiaa", "Stephanie Akomanyi", "Stephen Andoh", 
-        "Vincentia Ansah"
-      ],
-      "ARTS 4": [
-        "Abigail Aboagyewaa Etsir", "Alice Ewusi", "Anita Danso", "Augustine Baako Baah", "Cecilia Amoasi", 
-        "Cecilia Asante", "Charlotte Offei", "Christabel Andoh", "Dennis Boduah", "Elizabeth Edufuwah", 
-        "Elizabethe Lardje", "Esther Eyiah", "Eva Botwe", "Immaculate Nyarkoah Baidoo", "Irene Boateng", 
-        "Jamila Botchwey", "Joyce Oboh", "Kingsley Asamoah", "Mercy Frimpong", "Monica Eyi", 
-        "Patrick Anafo", "Portia Mfum", "Portia Ofori", "Theresah Appiah"
+        "Adjewunah Joyce", "Akomanyi Stephenie", "Amoah Hannah", "Amoako Matilda", "Andoh Stephen", "Ankomah Nana Afari", "Ansah Vicentia", "Appiah Michelle Nhyira", "Appiah Mimi Nhyira", "Appu Mary", "Arthur Patience", "Asamoah Francisca Nkrumah", "Asamoah Joyce", "Atensu Hilda", "Ayensu Hilda", "Ayitey Benedicta", "Ayitey Elizabeth", "Boadi Matilda", "Boafoah Mary", "Botwey Prince", "De-Graft Adjaye Fredrica", "Donkor Joycelyn Nhyira", "Essel Ruth", "Fayah Priscilla", "Hagan Kelvin", "Inkoom Bismark", "Koranteng Blessed Nyarkoh", "Koomson Festus", "Mensah Doris Ofosuwaa Nyamekye", "Mensah Elizabeth Ayieye", "Mensah Joana Nana", "Mensah Mary Nana Aba", "Naakpaan Dominica Namwinpoupel", "Ntow Ruben Otopah", "Nyavlo Jackline", "Nyarkoh Anita", "Nyarkoh Samuel", "Nyarkoh Vincent", "Okwan Bridget", "Omano Georgina", "Oppong Deborah", "Otabil Abigail", "Paintsil Bridget", "Quansah Leticia Blessing", "Quansah Lois", "Sakyi Harriet", "Takyiwaa Joana", "Taye Princess Racheal Amanorkie", "Tetteh Angela", "Tetteh Samuel", "Tettehwayo Barikisu", "Tettehwayo Gifty", "Tunumor Doris", "Wonkyi Elizabeth"
       ],
       "BUS": [
-        "Christiana Atta Kussiedu", "Ernestina Akakpo Boahen", "Racheal Nkrumah"
+        "Abdul Yusif M", "Akakpo Ernestine B.", "Ankoh Samuel", "Arafat Mohammed N", "Fiadu Davis", "Kussiedu Christiana Atta", "Mensah Solomon", "Nkrumah Racheal", "Oppong Stephen J.", "Yeboa David"
       ],
       "H/E 1A": [
-        "Abigail Arthur", "Andylove Birikorang", "Cecilia Anning", "Charlotte Senyo", "Ciara Kwatemaa Aidoo", 
-        "Deborah Eduful", "Dorcas Dadzie", "Dorcas Essilifie Ogyabi", "Edna Owusu", "Emmanuella Mensah", 
-        "Ernestina Amawuda", "Esther Donkoh", "Esther Nkyi", "Freda Beklisi", "Frederica Djabeng", 
-        "Gifty Appiah", "Gifty Nkum", "Gloria Okyere", "Grace Baidoo", "Jessica Esson Afful", 
-        "Kabigail Kumadzi", "Lawrencia Buabeng", "Luckycia Achiaa", "Mary Ayiku", "Precious Dansowaa Assan", 
-        "Priscilla Abosi", "Priscilla Adokoh Keelson", "Priscilla Amissah", "Priscilla Appiah-Kubi", 
-        "Quainoo Grace", "Queenstar Owusuwaa", "Rebecca Aidoo", "Rebecca Arthur", "Rebecca Ekua Taylor", 
-        "Rhoda Kwetey", "Rosemond Yemo", "Sandra Nyantakyiwaa Acquah", "Sarah Otoo", "Stella Ankrah", 
-        "Suzana Agbzukey", "Theodora Asimenu", "Vivian Blessing Prah", "Zita Appiah"
+        "Abosi Priscilla", "Acquah Sandra Nyantakyinaa", "Adokoh Priscilla Keelson", "Afful Jessica Esson", "Agbezukey Suzana", "Aidoo Ciaras Kwatemaa", "Aidoo Rebecca", "Akpasah Joycelyn", "Amawuda Ernestina", "Amissah Priscilla", "Ankrah Stella", "Anning Cecilia", "Appiah Gifty", "Appiah Luckycia", "Appiah Zita", "Appiah-Kubi Priscilla", "Arthur Abigail", "Arthur Rebecca", "Asimenu Theodora", "Assan Precious Dansowaa", "Ayiku Mary", "Baidoo Grace", "Beklisi Freda", "Birikorang Andylove", "Buabeng Lawrencia", "Dadzie Dorcas", "Djabeng Frederica", "Donkoh Esther", "Eduful Deborah", "Kwetey Rhoda", "Mensah Emmanuella", "Nkum Gifty", "Nkyi Esther", "Ogyabi Dorcas Essilfie", "Okyere Gloria", "Otoo Sarah", "Owusu Edna", "Owusuwaa Queenstar", "Prah Vivian Blessing", "Quainoo Grace", "Senyo Charlotte", "Taylor Rebecca Ekua", "Yemo Rosemond"
       ],
       "H/E 1B": [
-        "Abigail Yeboah", "Agnes Quaidoo", "Anamoah Mensah", "Aspect Dofui Xorse Amegatse", "Bernice Amofa", 
-        "Charity Asabea", "Christabel Kekeli Treve", "Christabel Opoku Dapaah", "Clara Abena Sackey", 
-        "Clara Cudjoe", "Comfort Adiza Seidu", "Elizabeth Anyina", "Elizabeth Ekuban", 
-        "Elizabeth Nana Aba Abekah", "Fredrica Borteley Anansey", "Georgina Bondzie", "Gifty Ekuwa Arthur", 
-        "Gladys Arthur", "Grace Kontoh", "Irene Pokuaa Aduse", "Jackline Ohemaa Boadi", "Janet Addo", 
-        "Jennifer Ananoah Mensah", "Lordina Afia Mensah", "Lordina Akosuah Mensah", "Mabel Blessing Mills", 
-        "Mabel Oppong", "Magdaline Oparebea", "Mary Mantey", "Nadia Nyarko", "Princess Georgiette Donkor", 
-        "Princess Mensah", "Priscilla Quainoo", "Queen Amon Kotey", "Queensta Nyame", "Ruth Ofori", 
-        "Ruweida Ankrah", "Sandra Gyekye H/E", "Sumaila Ayisha", "Veronica Inkoom", "Veronica Mensah", 
-        "Wendy Williams"
+        "Abakah Nana A. Elizabeth", "Addo Janet", "Aduse Irene Pokua", "Agyekwaa Jessica", "Amegatie Davi Yorse Aspect", "Amofa Bernice", "Ananey Bartley Fredrica", "Ankrah Rukida", "Anyina Elizabeth", "Arthur Gladys", "Arthur Ikua Gifty", "Asabea Charity", "Ayadzic Nkum Jessica", "Ayisha Sumaila", "Bentum Alberta", "Boasi Ohema Jackline", "Bondzi Georgina", "Cudjoe Clara", "Dapaah Opoku Christabel", "Djan Oporebea Magdaline", "Donkor Princess Georgiette", "Ekuban Elizabeth", "Enninful Martha", "Kontoh Grace", "Kotey Queen Amon", "Mantey Mary", "Mensah Anamoah", "Mensah Jennifer Anamoah", "Mensah Lordina Afia", "Mensah Lordina Akosua", "Mensah Princess", "Mensah Veronica", "Mills Mabel Blessing", "Nyame Queensta", "Nyarko Nadia", "Ofori Ruth", "Oppong Mabel", "Quaidoo Agnes", "Quainoo Priscilla", "Sackey Clara Abena", "Seidu Comfort Adiza", "Treve Christabel Kekeli", "Williams Wendy", "Yeboah Abigail"
       ],
       "H/E 2A": [
-        "Afida Esi Arthur", "Akosua Nyarkoh Offeh", "Alice Nifah", "Anastasia Arhin", "Anastasia Mensah", 
-        "Augustina Agyiri", "Belinda Ofori", "Benjamin Osei Aboagye", "Bernice Efua Essuman", "Betty Mensah", 
-        "Blessing Alivi", "Bridget Cudjoe", "Celine Oteng", "Christabel Akwaful", "Christabel Baaba Sawyerr", 
-        "Christiana Akonu", "Christiana Arthur", "Comfort Dadzie", "Comfort Naana Imbeah", "Dorothy Lamptey", 
-        "Edna Ndzibah", "Elizabeth Gyekerbia", "Elizabeth Tawiah Mills", "Emelia Nana Ama Aseiku", 
-        "Erica Agbezudor", "Erica Ampomah", "Eunice Colson", "Felicia Esson", "Felicia Sampson", 
-        "Francisca Tawiah", "Gifty Mensah", "Gladys Amoah Oforiwaa", "Gladys Oforiwa Amoah", "Grace Mensah", 
-        "Helina Atontaba", "Henrietta Ofori", "Ibrahim Aishatu", "Janet Achiaa Adomako", "Janet Nkrumah", 
-        "Jessica Boadi Darkoh", "Josephine Frimpomaa", "Judith Afful", "Juliana Essilfie", "Lillian Manu", 
-        "Margaret Akumanyi", "Mariam Esi Baidoo", "Martha Sam", "Mary Oduro", "Mercy Abakah", 
-        "Ophelia Adu-See", "Pepertual Baidoo", "Queeneth Babae A. Nyarkowah", "Rachael Jachobed Monney", 
-        "Veronica Ampiah", "Vida Arhinful", "Wendy Araba Hawkson", "Yvonne Yiedie Essah-Quarm"
+        "Abakah Mercy", "Abezudor Erica", "Ackah Priscilla", "Adomako Janet Achiaa", "Adusei Ophelia", "Afful Judith", "Agyiri Augustina", "Aishatu Ibrahim", "Akonu Christiana", "Akumani Margaret", "Akwaful Christabel", "Amissah Rebecca", "Amoah Gladys Oforiwaa", "Ampiah Veronica", "Ampomah Erica", "Anowah Theresa", "Apedo-Pedro Christabel", "Arhin Anastasia", "Arhinful Vida", "Arthur Afida Esi", "Arthur Christiana", "Aseiku Emelia Nana Ama", "Atontaba Helina", "Baidoo Mariam Esi", "Baidoo Pepertual", "Colson Eunice", "Cudjoe Bridget", "Dadzie Comfort", "Darkoh Jessica Boadi", "Essah-Quarm Yvonne Yiedie", "Essilfie Juliana", "Esson Felicia", "Essuman Bernice Efua", "Frimpomaa Josephine", "Gyekerbia Elizabeth", "Hawkson Wendy Araba", "Imbeah Comfort Naana", "Lamptey Dorothy", "Manu Lillian", "Mensah Anastasia", "Mensah Betty", "Mensah Gifty", "Mensah Gloria", "Mensah Grace", "Mills Elizabeth Tawiah", "Monney Rachael Jachobed", "Ndzibah Edna", "Nifah Alice", "Nkrumah Janet", "Nyarkowah Queeneth Babae A.", "Oboagye Benjamin Osei", "Oduro Mary", "Ofori Belinda", "Ofori Henrietta", "Oteng Celine", "Sampson Felicia", "Sam Martha", "Sawyerr Christabel Baaba", "Tawiah Francisca", "Thompson Grace"
       ],
       "H/E 2B": [
-        "Akosua Nyarkoh Offeh", "Angelina Okyere", "Bernice Asamoah Kyerematemaa", "Betty Sefakor Norvingo", 
-        "Christabel Apedo-Pedro", "Christabel Mantebea", "Cindy Fofie Ofosu", "Cindy Obeng Buadu", 
-        "Cindy Owusu Fofie", "Comfort Essilfie", "Comfort Ewusi", "Emelia Nyarko", "Esther Frimpong Anane", 
-        "Ethel Avuleteh", "Fortunate Ohenewaa Wilson", "Gifty Okyere", "Grace Arthur", "Grace Awotwe", 
-        "Lawrencia Eyiah", "Patience Mensah", "Princess Nyarkoh", "Priscilla Cobbinah", 
-        "Queen Victoria Essuman", "Rebecca Tawiah", "Richeal Debrah", "Rita Eshun", "Rukia Abdul Rahman", 
-        "Samira Akologo", "Sandra Ofori Nyarkoh", "Sandra Quainoo", "Sandra Quarcoo", 
-        "Theresah Adutwumwaa Binney", "Zaratu Sule"
-      ],
-      "LANG": [
-        "Doezier Yawson", "Edith De-Vos Quarshie", "Helina Tawiah", "Suzana Mensah"
+        "Abdulrahman Rukaya", "Acquah Abigail", "Adana Grace", "Afrane Elizabeth A.", "Akye Harriet", "Amedz Vivian Akorfa", "Arthur Diana", "Arthur Grace", "Arthur Priscilla", "Arthur Selina Bassaw", "Arthur Veronica", "Awotwe Grace", "Baidoo Nancy", "Binney Theresa", "Boateng Cynthia", "Buadu Cindy Obeng", "Cobbinah Princilla", "Cobbineah Prinella", "Cobohinah Blessing Adwoa", "Dadzie Mary", "Debrah Richeal", "Entsie Jennifer", "Eshun Rita", "Essilfie Comfort", "Essuman Queen Victoria", "Ewusi Comfort", "Eyiah Lawrencia", "Fofie Cindy Owusu", "Frimpong Esther", "Kyeremateng Bernice", "Mantebea Christabel", "Mensah Christiana", "Mensah Emelia", "Mensah Patience", "Norviglo Betty Sefakor", "Nyarko Emelia", "Nyarkoh Akosua Offeh", "Nyarkoh Princess", "Nyarkoh Sandra Ofori", "Offeh Akosua Nyarkoh", "Ofosu Cindy Fofie", "Okyere Angelina", "Okyere Gifty", "Quainoo Sandra", "Quarcoo Sandra", "Samira Akologo", "Tawiah Rebecca", "Wilson Fortunate Ohenewaa", "Zaratu Sule"
       ],
       "SCI": [
-        "Ali Nuhu", "Bless Ntow Asare", "Clifford Affranie", "Deborah Owusu Arthur", "Desmond Aidoo", 
-        "Dominic Agyapong", "Elizabeth Owusu", "Emelia Mensah", "Emmanuel Baidoo", "Emmanuel Essel", 
-        "Grace Nana Aba Acquah", "James Quansah", "Jessica Afadzie Nkum", "Joseph Baffoe", 
-        "Magret Longdon Oppong", "Majid Abdul Safyam", "Margaret Essiamah", "Mariana Sonia Acquah", 
-        "Matilda Dovlo", "Patricia Serwaa Amoako", "Prince Kwarteng", "Princess Selasi Seddoh", 
-        "Rachael Visu", "Samuel Nii Aryee Armaah", "Solomon S.K. Gyasi Jnr", "Stephanie Konadu Gaisie"
+        "Abdul Majid Safian", "Acquah Grace Nana Aba", "Addy Gabriel", "Afranie Clifford", "Agypong Dominic", "Aidoo Desmond", "Amoako Patricia", "Armah Samuel", "Arthur Deborah O", "Asare Bless", "Baidoo Emmanuel", "Dovlo Matilda", "Essel Emmanuel", "Essiamah Margaret", "Gyasie Solomon", "Konadu Stephanie", "Kwarteng Prince", "Mensah Emelia", "Nuhu Ali", "Oppong Margaret Longdon", "Seddoh Princess Selasi", "Visu Reahael"
       ],
       "V/A 1": [
-        "Abraham Mensah", "Alfred Nyarkoh", "Ampong Korankye", "Bernard Danso", "Charity Mbeah", 
-        "Christopher Kwaku Kakraba Enchill", "David Kweku Mensah", "Evans Odugbe", "Felix Ahoto Anyan", 
-        "Francis Essel", "Gabriel Debrah", "Gideon Blankson", "Hayfoed Kwaku Adzadzi", "Ibraheem Adam", 
-        "Isaac Kitsaba", "Kobina Sarfo", "Manuel Badu", "Maxwell Obeng", "Nathaniel Quansah", 
-        "Obed Ampadu Junior", "Othneal Boateng", "Paul Antwi", "Philip Addo", "Prosper Appo", 
-        "Rudolf Gyankye", "Samuel Saglah"
+        "Adam Ibraheem", "Addae Ebenezer", "Addo Philip", "Adzadzi Hayford Kwaku", "Agordzo Christiana", "Aidoo Theophilus", "Ampaadu Obed Juniour", "Ampah Emmanuel Kwaku", "Ampong Korankye", "Antwi Fosu Meckizadick", "Antwi Paul", "Anyan Felix", "Appo Prosper", "Awotwe Isaac", "Badu Manuel", "Baiden Raymond", "Blankson Gideon", "Boateng Edward", "Boateng Oathaniel", "Danso Bernard", "Debrah Gabriel", "Enchill Christopher K. Kakraba", "Essel Francis", "Gyankye Rudolf", "Kitsaba Isaac", "Mbeah Charity", "Mensah Abraham", "Mensah David Kweku", "Mensah Isaac", "Mensah Stephen", "Nyarkoh Alfred", "Obeng Maxwell", "Odugbe Evans", "Quansah Nathaniel", "Saglah Samuel", "Sarfo Kobina", "Tieky Gideon"
       ],
       "V/A 2": [
-        "Benedicta Agyapong", "Bismark Appiah", "Bright Owusu", "Dennis Appiah", "Desmond Amoako", 
-        "Emmanuel Arthur", "Emmanuel Joel Mensah", "Frederick . Yawson", "Frederick Osei", 
-        "Isaac Forson Mensah", "Ishmael Amissah", "Kenneth Aidoo", "Meshack Andoh", "Mesharck Odame", 
-        "Nancy Edusah", "Nasiru Yusif", "Nectarios Asamoah", "Obed Acquah", "Precious Osei", 
-        "Prince Hackman", "Raphael Dadzie", "Richard Ametepey", "Shadrack Kusi", "Wendy Sam", 
-        "William P.K. Obeng"
+        "Adu Michael", "Agyah Obed", "Agyapong Benedicta", "Aidoo Kenneth", "Ameky Richard", "Ametepey Richard", "Amissah Ishmael", "Amoah Albert", "Amoako Desmond", "Andoh Meshack", "Appiah Bismark", "Appiah Dennis", "Arthur Emmanuel", "Asamoah Nectarios", "Baidoo Patrick", "Bedor Patrick", "Botwey Ernest", "Dadzie Raphael", "Darko Julius", "Edusah Nancy", "Hackman Prince", "Kusi Shadrack", "Mensah Emmanuel Joel", "Mensah Isaac", "Obeng William P.K.", "Odame Mesharck", "Ofori Prince", "Okyere Stephen", "Osei Frederick", "Osei Precious", "Owusu Bright", "Sam Wendy", "Sarpong Dennis", "Yawson Frederick", "Yusif Nasiru"
       ]
     };
 
-    let classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
+    // Incremented cache version to refresh device storage automatically
+    const ROSTER_VERSION = "2025_2026_portal_reduced_v2";
+    let classRosters;
+
+    if (localStorage.getItem('custom_rosters_ver') !== ROSTER_VERSION) {
+      classRosters = defaultRosters;
+      localStorage.setItem('custom_rosters', JSON.stringify(defaultRosters));
+      localStorage.setItem('custom_rosters_ver', ROSTER_VERSION);
+    } else {
+      classRosters = JSON.parse(localStorage.getItem('custom_rosters')) || defaultRosters;
+    }
 
     // Ensure all classes are sorted alphabetically on initial load
     Object.keys(classRosters).forEach(cls => {
