@@ -1,6 +1,6 @@
 {
   "name": "Attendance Tracker",
-  "short_name": "Attendance",
+  "short_name": "Attend ICT",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
